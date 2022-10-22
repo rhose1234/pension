@@ -45,21 +45,53 @@ body {
 }
 
  .input_wrap input, select{
-  width: 100%;
-  height: 3rem;
-  border:  2px solid  #6246D5;
+  width: 100% !important;
+  height: 3rem !important;
+  border:  2px solid  #6246D5 !important;
   border-radius: 8px;
   padding: 10px;
 }
 .input_wrap label{
   color: #6246D5 !important;
+  font-size: 15px ;
+  font-weight: 500;
 }
 
 button.btn{
   background-color: #6246D5 !important;
   color: #ffffff;
   text-align: center;
+  display: flex !important;
+  justify-content: end !important;
 
+}
+.input_wrap.error small {
+  color: red;
+  visibility: visible;
+  font-size: 15px;
+}
+.input_wrap small {
+  position: absolute;
+  bottom: 0;
+  top: 60%;
+  left: 0;
+  margin-top: 2rem;
+  visibility: hidden;
+}
+.input_wrap.success input {
+  border-color: #6246D5;
+}
+
+.input_wrap.error input {
+  border-color: red;
+}
+
+.input_wrap.error input:focus,
+.input_wrap.success input:focus {
+  border: none;
+}
+small {
+  font-size: 0.625rem; /* 10px */
 }
 .error {
   color: red;
@@ -72,10 +104,6 @@ button.btn{
   font-size: 10px;
   text-align: left;
   font-weight: 600;
-}
-.input_wrap.error small {
-  color: red;
-  visibility: visible;
 }
 
 .showhide{
