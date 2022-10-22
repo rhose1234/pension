@@ -82,3 +82,8 @@ button.btn{
  display: none;
 
 }
+#pForm{
+  background-color: #6246D5;
+  color: #fff;
+  margin-top: 12px;
+}
