@@ -1,28 +1,38 @@
 function changeStatus(answer){
-console.log(answer.value);
-if(answer.value == 1 ){
-    document.getElementById("yes_output").classList.remove("showhide")
-}
-else{
-    document.getElementById("yes_output").classList.add("showhide")
-};
+  console.log(answer.value);
+  if(answer.value == 1 ){
+      document.getElementById("yes_output").classList.remove("showhide")
+  }
+  else{
+      document.getElementById("yes_output").classList.add("showhide")
+  };
 
-if(answer.value == 2 ){
-    document.getElementById("yes_output").classList.add("showhide")
-}
-else{
-    document.getElementById("pull").classList.add("showhide")
-};
+  if(answer.value == 2 ){
+      document.getElementById("yes_output").classList.add("showhide")
+  }
+  else{
+      document.getElementById("pull").classList.add("showhide")
+  };
 
-if(answer.value == 3 ){
-    document.getElementById("pull").classList.remove("showhide")
-    document.getElementById("push").classList.remove("showhide")
-}
-else{
-    document.getElementById("pull").classList.add("showhide")
-    document.getElementById("push").classList.add("showhide")
-}
+  if(answer.value == 3 ){
+      document.getElementById("pull").classList.remove("showhide")
+      document.getElementById("push2").classList.remove("showhide")
+      // document.getElementById('pForm').addEventListener('click' , function () {
+      //   showUploadForm()
+      // })
+      document.getElementById('pForm').addEventListener('click', ()=>{
+        showUploadForm()
+      })
+  }
+  else{
+      document.getElementById("pull").classList.add("showhide")
+      document.getElementById("push2").classList.add("showhide")
+  }
 
+  function showUploadForm(params) {
+      document.getElementById("push2").classList.add("showhide")
+      document.getElementById("push").classList.remove("showhide")
+  }
 
 }
 
@@ -30,6 +40,7 @@ else{
 const myform = document.getElementById('myform');
 const pension_code = document.getElementById('pension_code');
 const lists = document.getElementById('lists');
+const company_list = document.getElementById('company_list')
 const employee_code = document.getElementById('employee_code');
 const upload_file = document.getElementById('upload-file');
 const pension_company = document.getElementById('pension_company');
@@ -37,12 +48,13 @@ const pension_company = document.getElementById('pension_company');
 
 function reset(input) {
   const input_wrap  = input.parentElement;
-  const small = input_wrap .querySelector('small');
+  const small = input_wrap.querySelector('small');
   small.innerText = '';
-  input_wrap .classList.remove('error');
+  input_wrap.classList.remove('error');
 }
 
 myform.addEventListener('submit', (e) => {
+  e.preventDefault()
   checkInputs(e);
 });
 
@@ -56,6 +68,7 @@ function checkInputs(e) {
   if (pension_code === '') {
     setErrorFor(pension_code, ' Please fill out this field');
     e.preventDefault();
+    setErrorFor(pension_code, 'Please fill out this field');
   } else {
     setSuccessFor(pension_code);
   }
@@ -76,35 +89,39 @@ if (lists === '') {
     setSuccessFor(lists);
   }
 
-  if (employee_code === '') {
-    setErrorFor(employee_code, ' Please fill out this field');
-    e.preventDefault();
-  } else {
-    setSuccessFor(employee_code);
+  if(!document.getElementById('yes_output').getAttribute('class').includes('showhide')){
+    if (employee_code.value === '') {
+      e.preventDefault();
+      setErrorFor(employee_code, 'Please fill out this field');
+    } else {
+      setSuccessFor(employee_code);
+    }
   }
 
-  if (upload_file === '') {
-    setErrorFor(upload_file, ' upload pension file');
-    e.preventDefault();
-  } else {
-    setSuccessFor(upload_file);
+  if(!document.getElementById('push').getAttribute('class').includes('showhide')){
+    if (upload_file.value === '') {
+      e.preventDefault()
+      console.log("Upload Error")
+      setErrorFor(upload_file, 'upload pension file');
+    } else {
+      setSuccessFor(upload_file);
+    }
   }
 
 }
 
 function setErrorFor(input, message) {
-    const input_wrap = input.input_wrap;
+  const input_wrap = input.parentElement;
   const small = input_wrap.querySelector('small');
-
   small.innerText = message;
-
-  input_wrap.classList.remove('error');
+  small.classList.add('error');
+  small.classList.remove('success')
 }
 
-function setSuccessFor(input) {
+  function setSuccessFor(input) {
   const input_wrap = input.parentElement;
-  input_wrap.classList.add('success');
-  input_wrap.classList.remove('error');
+  input.classList.add('success');
+  input.classList.remove('error');
 }
 
 
